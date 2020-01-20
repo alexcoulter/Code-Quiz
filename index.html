@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <meta charset="UTF-8">
+  <title>Code Quiz</title>
+  <script type="text/javascript" src="./script.js"></script>
+  <script type="text/javascript" src="./questions.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="top">
+    <h5><a class="float-left" href="highScores.html">View High Scores</a></h5>
+    <h5 class="float-right" id="timer"></h5>
+  </div>
+  <div class="container bg-light" id="intro">
+    <h1 id="h1content"><u>Coding Quiz Challenge</u></h1>
+    <h4 id="h4content">Try to answer as many questions correctly as you can in 60 seconds. If you get a question wrong, then you lose 10 seconds. Good Luck!</h4><br>
+    <div id="buttonContainer">
+      <button id="startQuiz">Start Quiz</button>
+    </div>
+
+    <form class="form-inline hidden justify-content-center" id="initialsSubmit">
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="initials" class="sr-only">Enter Initials:</label>
+        <input type="text" class="form-control" id="initials" placeholder="Enter Your Initials">
+      </div>
+      <button type="submit" class="btn mb-2" id="initialsButton">Submit</button>
+    </form>
+  </div>
+
+  <div class="container hidden bg-light" id="quiz">
+    <h3 id="question"></h3>
+    <div id="quizQs"></div>
+    <hr>
+    <h4 id="feedback"></h4>
+  </div>
+
+  <!--Licence: The sound effect is permitted for commercial use under license Creative Commons Attribution 4.0 International License
+    http://www.orangefreesounds.com/ -->
+  <audio id="correctAudio">
+    <source src="correct.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <audio id="incorrectAudio">
+    <source src="wrong.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <audio id="crowd">
+    <source src="crowd.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+</body>
+
+</html>
