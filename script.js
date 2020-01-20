@@ -131,7 +131,7 @@ else{
   allScores.push(newUser);
   localStorage.setItem("allScores", JSON.stringify(allScores));
   console.log(allScores);
-  window.open("highscores.html","_self");
+  window.open("highScores.html","_self");
 }
 });
 
