@@ -78,6 +78,11 @@ button {
   margin: 0 auto;
 }
 
+#goBack, #clearScores {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
 .green {
   color: green;
 }
