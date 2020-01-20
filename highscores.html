@@ -1,52 +1,54 @@
 <!DOCTYPE html>
-<html lang = "en-us">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    <meta charset="UTF-8">
-    <title>High Scores</title>
-    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
-  </head>
+<html lang="en-us">
 
-  <body>
-    <div class = "top">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <meta charset="UTF-8">
+  <title>High Scores</title>
+  <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="top">
+  </div>
+  <div class="container bg-light" id="intro">
+    <h1 id="h1content"><u><b>High Scores</b></u></h1>
+    <ol id="highScores">
+    </ol>
+    <div id="buttonContainer">
+      <a href="index.html"><button id="goBack">Go Back</button></a>
+      <button id="clearScores">Clear Scores</button>
     </div>
-    <div class = "container bg-light" id = "intro">
-      <h1 id = "h1content"><u><b>High Scores</b></u></h1>
-      <ol id = "highScores">
-      </ol>
-      <div id = "buttonContainer">
-        <a href = "index.html"><button id ="goBack">Go Back</button></a>
-      <button id ="clearScores">Clear Scores</button>
-      </div>
-    </div>
-   <script>
-      var clearScores = document.getElementById("clearScores");
-      var highScores = document.getElementById("highScores");
-      var allScores = JSON.parse(localStorage.getItem("allScores"));
-     
-      //Arrange High Scores in descending order
-      allScores.sort(function(a, b) {
-    return parseFloat(b.score) - parseFloat(a.score);
-});
-      
-      //loop through saved scores and add them to High Scores List
-      for(var i = 0; i < allScores.length; i++){
-        var newLi = document.createElement("li");
-        newLi.textContent = allScores[i].name + ":  " + allScores[i].score + " points";
-        highScores.appendChild(newLi);      
-      }
-      
-      //Clears high scores if usser clicks 'Clear Scores' button
-      clearScores.addEventListener("click", function(){
-        localStorage.removeItem("allScores");
-        highScores.classList.add("hidden");
-      });
+  </div>
+  <script>
+    var clearScores = document.getElementById("clearScores");
+    var highScores = document.getElementById("highScores");
+    var allScores = JSON.parse(localStorage.getItem("allScores"));
+
+    //Arrange High Scores in descending order
+    allScores.sort(function (a, b) {
+      return parseFloat(b.score) - parseFloat(a.score);
+    });
+
+    //loop through saved scores and add them to High Scores List
+    for (var i = 0; i < allScores.length; i++) {
+      var newLi = document.createElement("li");
+      newLi.textContent = allScores[i].name + ":  " + allScores[i].score + " points";
+      highScores.appendChild(newLi);
+    }
+
+    //Clears high scores if usser clicks 'Clear Scores' button
+    clearScores.addEventListener("click", function () {
+      localStorage.removeItem("allScores");
+      highScores.classList.add("hidden");
+    });
 
 
 
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>
