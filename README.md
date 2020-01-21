@@ -1,5 +1,6 @@
 # Code Quiz
 
+Check it out:  https://alexcoulter.github.io/Code-Quiz/.
 ## Description
 
 * This is a timed quiz assessing your knowledge of coding.
@@ -16,10 +17,11 @@
 * Bootstrap framework
 * Vanilla Javascript
 
-
-
 ## Screenshots
 
 
-URL:  https://alexcoulter.github.io/Code-Quiz/.
 
+## Credits
+* The sound effects used were found at http://www.orangefreesounds.com/.
+* The main font used is 'Bangers' from Google Fonts.
+* The sound icons were from https://fontawesome.com/.

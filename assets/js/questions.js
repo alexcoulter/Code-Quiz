@@ -7,12 +7,12 @@
       answer: "CSS"
     },
     {
-      title: "Which of these functions parses an argument and returns a floating point number:",
+      title: "What function takes a string as an argument and returns a floating point number:",
       choices: ["numberify()", "parseFloat()", "parseInt()", "toNum()"],
       answer: "parseFloat()"
     },
     {
-      title: "Which of these values would evalaute to false when it's boolean value is checked?",
+      title: "Which of these values would evaluate to false when it's boolean value is checked?",
       choices: ["0", "null", "undefined", "All of the above"],
       answer: "All of the above"
     },
@@ -22,7 +22,7 @@
       answer: "split()"
     },
     {
-      title: "Which comparison operator would you use if you wanted to see if two variables have the same data types and values:",
+      title: "What comparison operator would you use if you wanted to see if two variables have the same data type and value:",
       choices: ["===", "==", "=", "!=="],
       answer: "==="
     },
@@ -32,7 +32,7 @@
       answer: "setTimeout(function(){}, 5000);"
     },
     {
-      title: "Which of these id's is written using camelcase:",
+      title: "Which of these ids is written using camelcase:",
       choices: ["#first-button", "#fIrStBuTtOn", "#first_BUTTON", "#firstButton"],
       answer: "#firstButton"
     },
@@ -47,7 +47,7 @@
       answer: ".hidden button{}"
     },
     {
-      title: "Which CSS declaration prioritizes a line of code and overrides inline styles:",
+      title: "What CSS declaration prioritizes a line of code and overrides inline styles:",
       choices: ["&Amnesty", "*Special*", "$Priority", "!important"],
       answer: "!important"
     }
