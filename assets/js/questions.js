@@ -1,7 +1,6 @@
-document.addEventListener("DOMContentLoaded", function () {
 
 
-  var questions = [
+   var questions = [
     {
       title: "Which of these coding languages is most useful for styling websites and applications?",
       choices: ["CSS", "HTML", "Javascript", "Python"],
@@ -71,6 +70,5 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   shuffle(questions);
-  localStorage.setItem("questions", JSON.stringify(questions));
+  //localStorage.setItem("questions", JSON.stringify(questions));
 
-});

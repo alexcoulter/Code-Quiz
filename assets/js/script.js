@@ -18,13 +18,14 @@ document.addEventListener("DOMContentLoaded", function () {
   var initialsAlert = document.getElementById("initialsAlert");
   var crowd = document.getElementById("crowd");
   var mute = document.getElementById("mute");
-  var questions = JSON.parse(localStorage.getItem("questions"));
+  //var questions = JSON.parse(localStorage.getItem("questions"));
   var score = 0;
   var i = 0;
   var timeLeft = 60;
   var muteAll = false;
   var muteCount = 0;
   muteCount = localStorage.getItem("muteCount");
+  console.log(muteCount);
   if((muteCount %2) !== 0) {
     mute.classList.remove("fa-microphone-alt");
     mute.classList.add("fa-microphone-alt-slash");
@@ -142,7 +143,6 @@ document.addEventListener("DOMContentLoaded", function () {
       muteAll = false;
     }
       muteCount++;
-      console.log(muteCount);
       localStorage.setItem("muteCount", muteCount);
   });
  
