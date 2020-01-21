@@ -103,5 +103,7 @@ ol {
 @media only screen and (max-width: 500px) {
   .container {
     Width: 95%;
+    margin-top: 20px;
   }
 }
+
