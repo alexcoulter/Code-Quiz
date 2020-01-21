@@ -7,6 +7,7 @@
   <title>Code Quiz</title>
   <script type="text/javascript" src="./script.js"></script>
   <script type="text/javascript" src="./questions.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js' SameSite = None></script>
   <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,7 +19,7 @@
     <h5><a class="float-left" href="highScores.html">View High Scores</a></h5>
     <h5 class="float-right" id="timer"></h5>
   </div>
-  <div class="container bg-light" id="intro">
+  <div class="container" id="intro">
     <h1 id="h1content"><u>Coding Quiz Challenge</u></h1>
     <h4 id="h4content">Try to answer as many questions correctly as you can in 60 seconds. If you get a question wrong, then you lose 10 seconds. Good Luck!</h4><br>
     <div id="buttonContainer">
@@ -31,14 +32,20 @@
         <input type="text" class="form-control" id="initials" placeholder="Enter Your Initials">
       </div>
       <button type="submit" class="btn mb-2" id="initialsButton">Submit</button>
+      <div class="alert alert-danger hidden" id = "initialsAlert" role="alert">
+        Your initials should be 3 or fewer characters
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        </button>
+      </div>
     </form>
   </div>
 
-  <div class="container hidden bg-light" id="quiz">
+  <div class="container hidden" id="quiz">
     <h3 id="question"></h3>
     <div id="quizQs"></div>
     <hr>
     <h4 id="feedback"></h4>
+    <i class='fas fa-microphone-alt float-right' id = "mute" style='font-size:24px;color:purple'></i>
   </div>
 
   <!--Licence: The sound effect is permitted for commercial use under license Creative Commons Attribution 4.0 International License

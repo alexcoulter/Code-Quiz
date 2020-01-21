@@ -15,12 +15,23 @@ document.addEventListener("DOMContentLoaded", function () {
   //var goBack = document.getElementById("goBack");
   var correctAudio = document.getElementById("correctAudio");
   var incorrectAudio = document.getElementById("incorrectAudio");
+  var initialsAlert = document.getElementById("initialsAlert");
   var crowd = document.getElementById("crowd");
+  var mute = document.getElementById("mute");
   var questions = JSON.parse(localStorage.getItem("questions"));
   var score = 0;
   var i = 0;
   var timeLeft = 60;
+  var muteAll = false;
+  var muteCount = 0;
+  muteCount = localStorage.getItem("muteCount");
+  if((muteCount %2) !== 0) {
+    mute.classList.remove("fa-microphone-alt");
+    mute.classList.add("fa-microphone-alt-slash");
+    muteAll = true;
+  }
   timer.textContent = "Time: 0";
+  
 
 
   //Timing function
@@ -47,11 +58,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (i < questions.length) {
       question.textContent = questions[i].title;
-      for (var j = 0; j < 4; j++) {
+      for (var j = 1; j < 5; j++) {
         var answer = document.createElement("button");
-        answer.setAttribute("q-id", j + 1);
+        answer.setAttribute("q-id", j);
         quizQs.append(answer);
-        answer.textContent = j + 1 + ". " + questions[i].choices[j];
+        answer.textContent = j + ". " + questions[i].choices[j-1];
       }
     }
     else {
@@ -69,8 +80,10 @@ document.addEventListener("DOMContentLoaded", function () {
     h4content.textContent = "Your final score was: " + score + " points";
     startButton.classList.add("hidden");
     initialsSubmit.classList.remove("hidden");
+    if(!muteAll && score > 4){
     crowd.play();
   }
+}
 
   //Event Listeners
   startButton.addEventListener("click", countdown);
@@ -82,9 +95,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (questions[i].choices[userGuessId - 1] == questions[i].answer) {
         feedback.textContent = "Correct!";
-        feedback.classList.add("green");
-        feedback.classList.remove("red");
+        feedback.style.color = "green";
+        if(!muteAll) {
         correctAudio.play();
+        }
         score++;
 
         while (quizQs.firstChild) {
@@ -94,13 +108,12 @@ document.addEventListener("DOMContentLoaded", function () {
         newQuestion();
       }
 
-
       else {
         feedback.textContent = "Wrong!";
-        feedback.classList.add("red");
-        feedback.classList.remove("green");
+        feedback.style.color = "red";
+        if(!muteAll) {
         incorrectAudio.play();
-
+        }
         while (quizQs.firstChild) {
           quizQs.removeChild(quizQs.firstChild);
         }
@@ -114,21 +127,39 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  
+  //   mutes/unmutes all sounds on click
+    mute.addEventListener("click", function(e) {
+    event.preventDefault();
+    if((muteCount %2) === 0) {
+      mute.classList.remove("fa-microphone-alt");
+      mute.classList.add("fa-microphone-alt-slash");
+      muteAll = true;
+    }
+    else {
+      mute.classList.add("fa-microphone-alt");
+      mute.classList.remove("fa-microphone-alt-slash");
+      muteAll = false;
+    }
+      muteCount++;
+      console.log(muteCount);
+      localStorage.setItem("muteCount", muteCount);
+  });
+ 
+
+     
 
   //Submits initials text box to high scores list
   initialsButton.addEventListener("click", function (event) {
     event.preventDefault();
     if (initials.value.length > 3 || initials.value.length < 1) {
-      alert("Enter 3 or fewer characters to submit your initials")
+      initialsAlert.classList.remove("hidden");
     }
     else {
       var newUser = { name: initials.value, score: score };
       var allScores = JSON.parse(localStorage.getItem("allScores") || "[]");
-
-      console.log(allScores);
       allScores.push(newUser);
       localStorage.setItem("allScores", JSON.stringify(allScores));
-      console.log(allScores);
       window.open("highScores.html", "_self");
     }
   });

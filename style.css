@@ -46,6 +46,7 @@ li {
   border-radius:10px;
   padding: 30px;
   width:500px;
+  background-color:rgba(255,250,250,0.7);
 }
 
 #buttonContainer {
@@ -70,12 +71,20 @@ button {
 
 }
 
+#mute, #feedback {
+  display:inline;
+}
+
 .hidden {
   display: none;
 }
 
 #initialSubmit {
   margin: 0 auto;
+}
+
+ol {
+  margin-right: 40px;
 }
 
 #goBack, #clearScores {
