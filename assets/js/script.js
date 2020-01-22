@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var initialsSubmit = document.getElementById("initialsSubmit");
   var initialsButton = document.getElementById("initialsButton");
   var initials = document.getElementById("initials");
-  //var goBack = document.getElementById("goBack");
   var correctAudio = document.getElementById("correctAudio");
   var incorrectAudio = document.getElementById("incorrectAudio");
   var initialsAlert = document.getElementById("initialsAlert");
@@ -24,15 +23,14 @@ document.addEventListener("DOMContentLoaded", function () {
   var timeLeft = 60;
   var muteAll = false;
   var muteCount = 0;
+
+  //retrieves sound preference from local storage
   muteCount = localStorage.getItem("muteCount");
-  console.log(muteCount);
-  if((muteCount %2) !== 0) {
+  if ((muteCount % 2) !== 0) {
     mute.classList.remove("fa-microphone-alt");
     mute.classList.add("fa-microphone-alt-slash");
     muteAll = true;
   }
-  timer.textContent = "Time: 0";
-  
 
 
   //Timing function
@@ -40,7 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var timeInterval = setInterval(function () {
       timer.textContent = "Time: " + timeLeft;
       timeLeft--;
-
       if (timeLeft < 0) {
         timer.textContent = "Time: 0";
         clearInterval(timeInterval);
@@ -53,17 +50,25 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
+  //removes questions from buttons and calls for a new question to replace it
+  function removeQuestion() {
+    while (quizQs.firstChild) {
+      quizQs.removeChild(quizQs.firstChild);
+    }
+    i++;
+    newQuestion();
+  }
+
 
   //generate new question
   function newQuestion() {
-
     if (i < questions.length) {
       question.textContent = questions[i].title;
       for (var j = 1; j < 5; j++) {
         var answer = document.createElement("button");
         answer.setAttribute("q-id", j);
         quizQs.append(answer);
-        answer.textContent = j + ". " + questions[i].choices[j-1];
+        answer.textContent = j + ". " + questions[i].choices[j - 1];
       }
     }
     else {
@@ -71,6 +76,57 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+
+  //Event Listeners
+  startButton.addEventListener("click", countdown);
+
+  quizQs.addEventListener("click", function (event) {
+    if (event.target.matches("button")) {
+      //event.preventDefault();
+      var userGuessId = event.target.getAttribute("q-id");
+
+      if (questions[i].choices[userGuessId - 1] == questions[i].answer) {
+        feedback.textContent = "Correct!";
+        feedback.style.color = "green";
+        if (!muteAll) {
+          correctAudio.play();
+        }
+        score++;
+        removeQuestion();
+      }
+
+      else {
+        feedback.textContent = "Wrong!";
+        feedback.style.color = "red";
+        if (!muteAll) {
+          incorrectAudio.play();
+        }
+        timeLeft = timeLeft - 10;
+        removeQuestion();
+      }
+    }
+    else {
+      console.log("not a button");
+    }
+  });
+
+
+  //   mutes/unmutes all sounds on click
+  mute.addEventListener("click", function (e) {
+    event.preventDefault();
+    if ((muteCount % 2) === 0) {
+      mute.classList.remove("fa-microphone-alt");
+      mute.classList.add("fa-microphone-alt-slash");
+      muteAll = true;
+    }
+    else {
+      mute.classList.add("fa-microphone-alt");
+      mute.classList.remove("fa-microphone-alt-slash");
+      muteAll = false;
+    }
+    muteCount++;
+    localStorage.setItem("muteCount", muteCount);
+  });
 
   //code for when timer ends
   function gameOver() {
@@ -81,75 +137,12 @@ document.addEventListener("DOMContentLoaded", function () {
     h4content.textContent = "Your final score was: " + score + " points";
     startButton.classList.add("hidden");
     initialsSubmit.classList.remove("hidden");
-    if(!muteAll && score > 4){
-    crowd.play();
+    if (!muteAll && score > 4) {
+      crowd.play();
+    }
   }
-}
 
-  //Event Listeners
-  startButton.addEventListener("click", countdown);
-
-  quizQs.addEventListener("click", function (event) {
-    if (event.target.matches("button")) {
-      event.preventDefault();
-      var userGuessId = event.target.getAttribute("q-id");
-
-      if (questions[i].choices[userGuessId - 1] == questions[i].answer) {
-        feedback.textContent = "Correct!";
-        feedback.style.color = "green";
-        if(!muteAll) {
-        correctAudio.play();
-        }
-        score++;
-
-        while (quizQs.firstChild) {
-          quizQs.removeChild(quizQs.firstChild);
-        }
-        i++;
-        newQuestion();
-      }
-
-      else {
-        feedback.textContent = "Wrong!";
-        feedback.style.color = "red";
-        if(!muteAll) {
-        incorrectAudio.play();
-        }
-        while (quizQs.firstChild) {
-          quizQs.removeChild(quizQs.firstChild);
-        }
-        i++;
-        timeLeft = timeLeft - 10;
-        newQuestion();
-      }
-    }
-    else {
-      console.log("not a button");
-    }
-  });
-
-  
-  //   mutes/unmutes all sounds on click
-    mute.addEventListener("click", function(e) {
-    event.preventDefault();
-    if((muteCount %2) === 0) {
-      mute.classList.remove("fa-microphone-alt");
-      mute.classList.add("fa-microphone-alt-slash");
-      muteAll = true;
-    }
-    else {
-      mute.classList.add("fa-microphone-alt");
-      mute.classList.remove("fa-microphone-alt-slash");
-      muteAll = false;
-    }
-      muteCount++;
-      localStorage.setItem("muteCount", muteCount);
-  });
- 
-
-     
-
-  //Submits initials text box to high scores list
+  //Verifies input initials and submits initials text box to high scores list
   initialsButton.addEventListener("click", function (event) {
     event.preventDefault();
     if (initials.value.length > 3 || initials.value.length < 1) {
