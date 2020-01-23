@@ -1,3 +1,4 @@
+//document.addEventListener("DOMContentLoaded", function () {
 
 
    var questions = [
@@ -72,3 +73,4 @@
   shuffle(questions);
   //localStorage.setItem("questions", JSON.stringify(questions));
 
+//});
